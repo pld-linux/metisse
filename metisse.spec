@@ -26,7 +26,7 @@ BuildRequires:	rplay-devel
 Requires:	vfmg >= 0.9.18-10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_wmpropsdir	/usr/share/wm-properties
+%define		_wmpropsdir	/usr/share/wm-properties
 
 %description
 Metisse is an experimental X desktop with some OpenGL capacity. It
@@ -43,7 +43,7 @@ Metisse to eksperymentalny X desktop z mo¿liwo¶ciami OpenGL. Sk³ada
 siê z wirtualnego serwera o nazwie Xwnc, specialnej wersji FVWM oraz
 modu³u FvwmAmetista do FVWM. Xwnc to po³±czenie Xvnc i XDarwin. Nie
 rysuje nic na ekranie; wszystko jest rysowane do obrazów.
-Podobnie do Xvns, lecz przy u¿yciu innego portoko³u, Xwnc wysy³a te
+Podobnie do Xvnc, lecz przy u¿yciu innego protoko³u, Xwnc wysy³a te
 obrazy (i inne informacje) do "przegl±darki". T± przegl±dark± jest
 FvwmAmetista; u¿ywa OpenGL do wy¶wietlania biurka X w oknie "zwyk³ego"
 serwera X z akceleracj± 3D.
