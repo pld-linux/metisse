@@ -1,0 +1,13 @@
+diff -Nur metisse-0.3.3.orig/fvwm-insitu/configure.in metisse-0.3.3/fvwm-insitu/configure.in
+--- metisse-0.3.3.orig/fvwm-insitu/configure.in	2004-06-14 14:51:44.000000000 +0200
++++ metisse-0.3.3/fvwm-insitu/configure.in	2004-10-15 12:35:18.075035168 +0200
+@@ -803,7 +803,7 @@
+ AC_SUBST(FVWM_PERLLIB)
+ 
+ dnl ******* gettext
+-ALL_LINGUAS="ar de fr sv_SE zh_CN"
++ALL_LINGUAS="ar de fr sv zh_CN"
+ FVWM_DOMAIN="fvwm"
+ FVWMTASKBAR_DOMAIN="FvwmTaskBar"
+ FVWMSCRIPT_DOMAIN="FvwmScript"
+

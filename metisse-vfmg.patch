@@ -1,0 +1,40 @@
+diff -Nura metisse-0.3.4.orig/FvwmAmetista/config/applications metisse-0.3.4/FvwmAmetista/config/applications
+--- metisse-0.3.4.orig/FvwmAmetista/config/applications	2004-11-26 14:41:51.000000000 +0100
++++ metisse-0.3.4/FvwmAmetista/config/applications	2004-12-07 22:46:43.844053192 +0100
+@@ -2,23 +2,7 @@
+ # Programs menu
+ # ---------------------------------------------------------------------------
+ 
+-DestroyMenu AMenuRootProgram
+-AddToMenu   AMenuRootProgram "Programs" Title 
+-+ "XEmacs"	Exec exec xemacs
+-+ "Emacs"	Exec exec emacs
+-+ "Gvim"	Exec exec gvim
+-+ "" Nop
+-+ "SU xterm"	Exec exec xterm -bg blue -fg black -e su -l root
+-+ "Xcalc"	Exec exec xcalc
+-+ "" Nop
+-+ "PDF Viewer"	 FuncFvwmDocView
+-+ "Image Viewer" FuncFvwmImage
+-+ "Image Editor" FuncFvwm3Image
+-+ "" Nop
+-+ "Mozilla"	Exec exec mozilla
+-+ "Galeon"	Exec exec galeon
+-+ "kppp"	Exec exec kppp
+-
++PipeRead 'vfmg -c metisse'
+ 
+ # ---------------------------------------------------------------------------
+ # Preferred programs by type for a click with mouse 1, 2 or 3 on
+diff -Nura metisse-0.3.4.orig/FvwmAmetista/config/menus metisse-0.3.4/FvwmAmetista/config/menus
+--- metisse-0.3.4.orig/FvwmAmetista/config/menus	2004-11-22 23:10:03.000000000 +0100
++++ metisse-0.3.4/FvwmAmetista/config/menus	2004-12-07 22:50:04.366569136 +0100
+@@ -3,7 +3,7 @@
+ 
+ DestroyMenu AMenuRoot
+ AddToMenu   AMenuRoot "Root Menu" Title
+-+ "&Programs"		Popup AMenuRootProgram
+++ "&Programs"		Popup Applications
+ + "&Window Ops"		Popup AMenuWinOps
+ + "&Ametista Config"	Popup AMenuConfig
+ + "" Nop

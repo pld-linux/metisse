@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=XSession
+Exec=metisse-start-fvwm
+TryExec=metisse-start-fvwm
+Name=Metisse
+Comment=3D Window Manager
+Comment[pl]=Trójwymiarowy zarządca okien
+# vi: encoding=utf-8

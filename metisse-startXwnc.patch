@@ -1,0 +1,166 @@
+diff -Nur metisse-0.3.3.orig/bin/metisse-start-fvwm.in metisse-0.3.3/bin/metisse-start-fvwm.in
+--- metisse-0.3.3.orig/bin/metisse-start-fvwm.in	2004-06-15 16:30:47.000000000 +0200
++++ metisse-0.3.3/bin/metisse-start-fvwm.in	2004-10-17 02:30:28.710319024 +0200
+@@ -14,11 +14,15 @@
+     echo "Usage:
+ 
+   metisse-start-fvwm [ options ] -- [FvwmAmetista options] -- [fvwm options]
++         -- [Xwnc options]
+ 
+ metisse-start-fvwm options:
+ 
+   -h        show this help and exit
+   -c  path  user fvwm config dir (default ~/.fvwm-metisse)
++  -Xwnc     start Xwnc (if needed) 
++  -killXwnc kill Xwnc when session is closed (and if -Xwnc)
++  -no-Xwnc -no-killXwnc  don't start or kill even if specified in config file
+   -wd :x    display number of the Xwnc server (default :1)
+   -wh host  the host of the Xwnc server (default 127.0.0.1)
+   -wp pass  passowrd for Xwnc (no password by default)
+@@ -39,7 +43,25 @@
+ 
+ user_config_dir=$HOME/.fvwm-metisse
+ 
++startXwnc=yes
++killXwnc=if_start
++XwncConfig=$user_config_dir/XwncConfig
++[ -f $XwncConfig ] && . $XwncConfig
++
+ WDPY=":1"
++for Xlock in /tmp/.X*-lock; do
++	if [ -O $Xlock ]; then
++		XPID=$(cat $Xlock)
++		if ps $XPID | grep -q Xwnc; then
++			XWNC_STARTED=1
++			break
++		fi
++	fi
++done
++if [ -n "$XWNC_STARTED" ]; then
++	WDPY="$(ps $XPID | tr " " "\n" | sed -n "/^:[0-9]*$/p")"
++	echo "Xwnc already started on 127.0.0.1$WDPY (PID:"$XPID")"
++fi 
+ WHOST="127.0.0.1"
+ WPASS="no"
+ XWNC_DISPLAY="wnc://$WHOST$WDPY"
+@@ -56,6 +78,8 @@
+ 			whoseArgs="ametista"
+ 		elif [ "$whoseArgs" = "ametista" ]; then
+ 			whoseArgs="fvwm"
++		elif [ "$whoseArgs" = "fvwm" ]; then
++			whoseArgs="xwnc"
+ 		fi
+ 	;;
+ 	*)
+@@ -75,6 +99,8 @@
+ 				ametistaArgs="$ametistaArgs $1"
+ 			;;
+ 			esac
++		elif [ "$whoseArgs" = "xwnc" ]; then
++			xwncArgs="$xwncArgs $1"
+ 		else
+ 			case "$1" in
+ 			--wdisplay|--wd|-wd)
+@@ -104,6 +130,18 @@
+ 				shift
+ 				fvwmExe="$1"
+ 			;;
++			--Xwnc|-Xwnc)
++				startXwnc=yes
++			;;
++			--killXwnc|-killXwnc)
++				killXwnc=if_start
++			;;
++			--no-Xwnc|-no-Xwnc)
++				startXwnc=no
++			;;
++			--no-killXwnc|-no-killXwnc)
++				killXwnc=no
++			;;
+ 			-r|--r)
+ 			    reInstallConfig=1
+ 			;;
+@@ -214,6 +252,45 @@
+     touch $user_config_dir/.aconfig
+ fi
+ 
++#start Xwnc
++if [ "$startXwnc" == "yes" ]; then
++	XwncConfig=$user_config_dir/XwncConfig
++	[ -f $XwncConfig ] && . $XwncConfig
++	if [ "$WHOST" != "127.0.0.1" ]; then
++		echo "WARNING: -Xwnc option passed, but Xwnc host is not localhost: $WHOST"
++		echo "WARNING: Will not try to start Xwnc"
++	else
++		if [ ! -n "$xwncArgs" ]; then
++			[ -n "$XwncOptions" ] && xwncArgs="$XwncOptions"
++			[ ! -n "$xwncArgs" ] && xwncArgs="-ac"
++		fi
++		echo "$xwncArgs" | egrep -vq ":[0-9]" && \
++			xwncArgs="$xwncArgs $WDPY"
++		
++		if [ -n "$XWNC_STARTED" ]; then
++		  sXwncArgs=$(ps $XPID | sed -n "/Xwnc/{s/^.*Xwnc //;p}"| xargs)
++		  [ "$(echo $xwncArgs | xargs )" != "$sXwncArgs" ] && cat << EOF
++WARNING[Xwnc] Passed Xwnc arguments: $xwncArgs
++WARNING[Xwnc] differs from started Xwnc arguments: $sXwncArgs
++WARNING[Xwnc] but will not start other Xwnc
++EOF
++		else
++		  if [ -e /tmp/.X$(echo $WDPY | cut -c 2-)-lock ]; then
++		    for DPY_for_Xwnc in 1 2 3 4 5 6 7 8; do
++		      if [ ! -e /tmp/.X$DPY_for_Xwnc-lock ]; then
++			xwncArgs="$(echo "$xwncArgs" | \
++				sed "s/$WDPY/:$DPY_for_Xwnc/")"
++		        break
++		      fi
++		    done
++		  fi
++		  echo "Starting Xwnc with args $xwncArgs"
++		  Xwnc $xwncArgs &
++		  [ "$killXwnc" == "if_start" ] && killXwnc=yes
++		fi
++	fi	
++fi
++
+ FVWMAMETISTA_ARGS="-d $FVWMAMETISTA_DISPLAY -w $XWNC_DISPLAY $ametistaArgs"
+ export FVWMAMETISTA_ARGS
+ export METISSE_FVWM_CONFIG_DIR
+@@ -221,3 +298,13 @@
+ echo "Start fvwmi with args $FVWMAMETISTA_ARGS for FvwmAmetista"
+ 
+ env FVWM_USERDIR=$user_config_dir $fvwmExe -display $FVWM_DISPLAY $fvwmArgs
++
++if [ "$killXwnc" == "yes" ]; then
++	pid=$(cat /tmp/.X$(echo $WDPY | cut -c 2-)-lock)
++	if ps $pid ; then
++		kill -TERM $pid
++		sleep 0.1
++		ps $pid && sleep 3 && ps $pid && \
++			kill -KILL $pid
++	fi
++fi
+diff -Nur metisse-0.3.3.orig/FvwmAmetista/config/Makefile.am metisse-0.3.3/FvwmAmetista/config/Makefile.am
+--- metisse-0.3.3.orig/FvwmAmetista/config/Makefile.am	2004-01-28 00:03:47.000000000 +0100
++++ metisse-0.3.3/FvwmAmetista/config/Makefile.am	2004-10-17 02:32:24.450723808 +0200
+@@ -6,7 +6,7 @@
+ configdir = $(METISSE_FVWM_CONFIG_DIR)
+ 
+ CONFIG_FILES = ametistarc applications background bindings bindings-functions \
+-	desks extra fonts menus menustyle modules styles
++	desks extra fonts menus menustyle modules styles XwncConfig
+ 
+ config_DATA = scripting.pl config-files-list fvwm2rc $(CONFIG_FILES)
+ 
+diff -Nur metisse-0.3.3.orig/FvwmAmetista/config/XwncConfig metisse-0.3.3/FvwmAmetista/config/XwncConfig
+--- metisse-0.3.3.orig/FvwmAmetista/config/XwncConfig	1970-01-01 01:00:00.000000000 +0100
++++ metisse-0.3.3/FvwmAmetista/config/XwncConfig	2004-10-17 02:31:59.613499640 +0200
+@@ -0,0 +1,8 @@
++# start Xwnc ? (yes, no) default: yes
++startXwnc=yes
++# Xwnc options ? (Xwnc --help) default: "-ac :1"
++#XwncOptions=
++# kill Xwnc when session ends ? (yes, no, if_start) default: if_start
++# if "no" you can close session and then back without loosing anything
++# (but whis is memory waste)
++killXwnc=if_start
