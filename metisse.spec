@@ -53,15 +53,15 @@ serwera X z akceleracj± 3D.
 
 %package -n Xwnc
 Summary:	Internam metisse X server
-Summary(pl):	Wewnetrzny serwer X metisse
+Summary(pl):	Wewnêtrzny serwer X metisse
 Group:		X11/Applications/Networking
 Conflicts:	metisse < 0.3.5-1.9
 
 %description -n Xwnc
-no desc
+Internam metisse X server.
 
 %description -n Xwnc -l pl
-no desc
+Wewnêtrzny serwer X metisse.
 
 %prep
 %setup -q
