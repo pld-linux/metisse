@@ -23,7 +23,7 @@ BuildRequires:	libstroke-devel
 BuildRequires:	nucleo-devel >= 0.1-0.20041130.1
 BuildRequires:	readline-devel
 BuildRequires:	rplay-devel
-Requires:	vfmg
+Requires:	vfmg >= 0.9.18-10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_wmpropsdir	/usr/share/wm-properties
