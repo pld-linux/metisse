@@ -2,7 +2,7 @@ Summary:	A 3D X Desktop
 Summary(pl):	Trójwymiarowe biurko
 Name:		metisse
 Version:	0.3.5
-Release:	1
+Release:	1.9
 License:	GPL
 Group:		X11/Window Managers
 Source0:	http://insitu.lri.fr/~chapuis/software/metisse/%{name}-%{version}.tar.bz2
@@ -25,6 +25,7 @@ BuildRequires:	readline-devel
 BuildRequires:	rplay-devel
 Requires:	ImageMagick-coder-jpeg
 Requires:	ImageMagick-coder-png
+Requires:	Xwnc = %{version}-%{release}
 Requires:	vfmg >= 0.9.18-10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,6 +50,18 @@ Podobnie do Xvnc, lecz przy u¿yciu innego protoko³u, Xwnc wysy³a te
 obrazy (i inne informacje) do "przegl±darki". T± przegl±dark± jest
 FvwmAmetista; u¿ywa OpenGL do wy¶wietlania biurka X w oknie "zwyk³ego"
 serwera X z akceleracj± 3D.
+
+%package -n Xwnc
+Summary:	Internam metisse X server
+Summary(pl):	Wewnetrzny serwer X metisse
+Group:		X11/Applications/Networking
+Conflicts:	metisse < 0.3.5-1.9
+
+%description -n Xwnc
+no desc
+
+%description -n Xwnc -l pl
+no desc
 
 %prep
 %setup -q
@@ -93,10 +106,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/[!X]*
 %attr(755,root,root) %{_libdir}/*
 %{_datadir}/%{name}
 %{_datadir}/fvwm-insitu
 %{_datadir}/xsessions/%{name}.desktop
 %{_wmpropsdir}/%{name}.desktop
 %{_mandir}/*/*
+
+%files -n Xwnc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/Xwnc
