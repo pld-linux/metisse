@@ -2,7 +2,7 @@ Summary:	A 3D X Desktop
 Summary(pl):	Trójwymiarowe biurko
 Name:		metisse
 Version:	0.3.5
-Release:	1.9
+Release:	2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	http://insitu.lri.fr/~chapuis/software/metisse/%{name}-%{version}.tar.bz2
@@ -52,16 +52,20 @@ FvwmAmetista; u¿ywa OpenGL do wy¶wietlania biurka X w oknie "zwyk³ego"
 serwera X z akceleracj± 3D.
 
 %package -n Xwnc
-Summary:	Internam metisse X server
+Summary:	Internal metisse X server
 Summary(pl):	Wewnêtrzny serwer X metisse
 Group:		X11/Applications/Networking
-Conflicts:	metisse < 0.3.5-1.9
+Conflicts:	metisse < 0.3.5-2
 
 %description -n Xwnc
-Internam metisse X server.
+Xwnc is a mix of Xvnc and XDarwin. It draws nothing on your screen;
+everything is drawn into pixmaps. Similarly to Xvnc, but with a
+different protocol.
 
 %description -n Xwnc -l pl
-Wewnêtrzny serwer X metisse.
+Xwnc to po³±czenie Xvnc i XDarwin. Nie rysuje nic na ekranie; wszystko
+jest rysowane do obrazów. Podobnie do Xvnc, lecz przy u¿yciu innego
+protoko³u.
 
 %prep
 %setup -q
