@@ -20,7 +20,7 @@ BuildRequires:	fribidi-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libstroke-devel
-BuildRequires:	nucleo-devel >= 0.1-0.20041130.1
+BuildRequires:	nucleo-devel >= 0.1-0.20041216.1
 BuildRequires:	readline-devel
 BuildRequires:	rplay-devel
 Requires:	ImageMagick-coder-jpeg
