@@ -1,12 +1,12 @@
 Summary:	A 3D X Desktop
 Summary(pl):	Trójwymiarowe biurko
 Name:		metisse
-Version:	0.3.4
+Version:	0.3.5
 Release:	1
 License:	GPL
 Group:		X11/Window Managers
 Source0:	http://insitu.lri.fr/~chapuis/software/metisse/%{name}-%{version}.tar.bz2
-# Source0-md5:	a2a3ef747da4fca36c027e0bbd858673
+# Source0-md5:	755ec7ef77f640fa86fcd6bf6627ecd7
 Source1:	%{name}.desktop
 Source2:	%{name}-xsession.desktop
 Patch0:		%{name}-locale_names.patch
