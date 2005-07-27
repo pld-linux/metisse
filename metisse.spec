@@ -1,3 +1,4 @@
+%define	_nucleo_ver	0.1-0.20041216.1
 Summary:	A 3D X Desktop
 Summary(pl):	Trójwymiarowe biurko
 Name:		metisse
@@ -20,12 +21,13 @@ BuildRequires:	fribidi-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libstroke-devel
-BuildRequires:	nucleo-devel >= 0.1-0.20041216.1
+BuildRequires:	nucleo-devel >= %{_nucleo_ver}
 BuildRequires:	readline-devel
 BuildRequires:	rplay-devel
 Requires:	ImageMagick-coder-jpeg
 Requires:	ImageMagick-coder-png
 Requires:	Xwnc = %{version}-%{release}
+Requires:	nucleo >= %{_nucleo_ver}
 Requires:	vfmg >= 0.9.18-10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
