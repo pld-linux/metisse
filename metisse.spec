@@ -3,7 +3,7 @@ Summary:	A 3D X Desktop
 Summary(pl):	Trójwymiarowe biurko
 Name:		metisse
 Version:	0.3.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Window Managers
 Source0:	http://insitu.lri.fr/~chapuis/software/metisse/%{name}-%{version}.tar.bz2
@@ -28,7 +28,7 @@ Requires:	ImageMagick-coder-jpeg
 Requires:	ImageMagick-coder-png
 Requires:	Xwnc = %{version}-%{release}
 Requires:	nucleo >= %{_nucleo_ver}
-Requires:	vfmg >= 0.9.18-10
+Requires:	vfmg >= 0.9.95
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
