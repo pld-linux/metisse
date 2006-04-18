@@ -22,7 +22,7 @@ diff -Nura metisse-0.3.4.orig/FvwmAmetista/config/applications metisse-0.3.4/Fvw
 -+ "Galeon"	Exec exec galeon
 -+ "kppp"	Exec exec kppp
 -
-+PipeRead 'vfmg -c -i -f metisse'
++PipeRead 'vfmg metisse'
  
  # ---------------------------------------------------------------------------
  # Preferred programs by type for a click with mouse 1, 2 or 3 on
