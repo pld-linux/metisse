@@ -1,6 +1,6 @@
 %define	_nucleo_ver	0.1-0.20041216.1
 Summary:	A 3D X Desktop
-Summary(pl):	Trójwymiarowe biurko
+Summary(pl.UTF-8):   TrÃ³jwymiarowe biurko
 Name:		metisse
 Version:	0.3.5
 Release:	4
@@ -43,19 +43,19 @@ pixmaps (and other information) to a "viewer". FvwmAmetista is such a
 viewer; it uses OpenGL for rendering the X desktop into a window of a
 "regular" 3D accelerated X server.
 
-%description -l pl
-Metisse to eksperymentalny X desktop z mo¿liwo¶ciami OpenGL. Sk³ada
-siê z wirtualnego serwera o nazwie Xwnc, specialnej wersji FVWM oraz
-modu³u FvwmAmetista do FVWM. Xwnc to po³±czenie Xvnc i XDarwin. Nie
-rysuje nic na ekranie; wszystko jest rysowane do obrazów.
-Podobnie do Xvnc, lecz przy u¿yciu innego protoko³u, Xwnc wysy³a te
-obrazy (i inne informacje) do "przegl±darki". T± przegl±dark± jest
-FvwmAmetista; u¿ywa OpenGL do wy¶wietlania biurka X w oknie "zwyk³ego"
-serwera X z akceleracj± 3D.
+%description -l pl.UTF-8
+Metisse to eksperymentalny X desktop z moÅ¼liwoÅ›ciami OpenGL. SkÅ‚ada
+siÄ™ z wirtualnego serwera o nazwie Xwnc, specialnej wersji FVWM oraz
+moduÅ‚u FvwmAmetista do FVWM. Xwnc to poÅ‚Ä…czenie Xvnc i XDarwin. Nie
+rysuje nic na ekranie; wszystko jest rysowane do obrazÃ³w.
+Podobnie do Xvnc, lecz przy uÅ¼yciu innego protokoÅ‚u, Xwnc wysyÅ‚a te
+obrazy (i inne informacje) do "przeglÄ…darki". TÄ… przeglÄ…darkÄ… jest
+FvwmAmetista; uÅ¼ywa OpenGL do wyÅ›wietlania biurka X w oknie "zwykÅ‚ego"
+serwera X z akceleracjÄ… 3D.
 
 %package -n Xwnc
 Summary:	Internal metisse X server
-Summary(pl):	Wewnêtrzny serwer X metisse
+Summary(pl.UTF-8):   WewnÄ™trzny serwer X metisse
 Group:		X11/Applications/Networking
 Conflicts:	metisse < 0.3.5-2
 
@@ -64,10 +64,10 @@ Xwnc is a mix of Xvnc and XDarwin. It draws nothing on your screen;
 everything is drawn into pixmaps. Similarly to Xvnc, but with a
 different protocol.
 
-%description -n Xwnc -l pl
-Xwnc to po³±czenie Xvnc i XDarwin. Nie rysuje nic na ekranie; wszystko
-jest rysowane do obrazów. Podobnie do Xvnc, lecz przy u¿yciu innego
-protoko³u.
+%description -n Xwnc -l pl.UTF-8
+Xwnc to poÅ‚Ä…czenie Xvnc i XDarwin. Nie rysuje nic na ekranie; wszystko
+jest rysowane do obrazÃ³w. Podobnie do Xvnc, lecz przy uÅ¼yciu innego
+protokoÅ‚u.
 
 %prep
 %setup -q
