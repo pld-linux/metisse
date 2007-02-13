@@ -1,6 +1,6 @@
 %define	_nucleo_ver	0.1-0.20041216.1
 Summary:	A 3D X Desktop
-Summary(pl.UTF-8):   Trójwymiarowe biurko
+Summary(pl.UTF-8):	Trójwymiarowe biurko
 Name:		metisse
 Version:	0.3.5
 Release:	4
@@ -55,7 +55,7 @@ serwera X z akceleracją 3D.
 
 %package -n Xwnc
 Summary:	Internal metisse X server
-Summary(pl.UTF-8):   Wewnętrzny serwer X metisse
+Summary(pl.UTF-8):	Wewnętrzny serwer X metisse
 Group:		X11/Applications/Networking
 Conflicts:	metisse < 0.3.5-2
 
