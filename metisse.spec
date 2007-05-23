@@ -1,33 +1,33 @@
-%define	_nucleo_ver	0.1-0.20041216.1
+%define pre rc4
 Summary:	A 3D X Desktop
 Summary(pl.UTF-8):	Trójwymiarowe biurko
 Name:		metisse
-Version:	0.3.5
-Release:	4
+Version:	0.4.0
+Release:	0.%{pre}.1
 License:	GPL
 Group:		X11/Window Managers
-Source0:	http://insitu.lri.fr/~chapuis/software/metisse/%{name}-%{version}.tar.bz2
-# Source0-md5:	755ec7ef77f640fa86fcd6bf6627ecd7
+Source0:	http://insitu.lri.fr/metisse/download/latest/metisse-0.4.0-%{pre}.tar.bz2
+# Source0-md5:	f2f5ee1b12b2ec8cae33abec132d7616
 Source1:	%{name}.desktop
 Source2:	%{name}-xsession.desktop
 Patch0:		%{name}-locale_names.patch
 Patch1:		%{name}-startXwnc.patch
 Patch2:		%{name}-vfmg.patch
 URL:		http://insitu.lri.fr/~chapuis/metisse/
-BuildRequires:	XFree86-OpenGL-devel
+BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	fribidi-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libstroke-devel
-BuildRequires:	nucleo-devel >= %{_nucleo_ver}
+BuildRequires:	nucleo-devel >= 0.6
 BuildRequires:	readline-devel
 BuildRequires:	rplay-devel
 Requires:	ImageMagick-coder-jpeg
 Requires:	ImageMagick-coder-png
 Requires:	Xwnc = %{version}-%{release}
-Requires:	nucleo >= %{_nucleo_ver}
+Requires:	nucleo >= 0.6
 Requires:	vfmg >= 0.9.95
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
