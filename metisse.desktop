@@ -1,9 +1,7 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Metisse
 Exec=metisse-start-fvwm
 TryExec=metisse-start-fvwm
-
 [Window Manager]
 SessionManaged=true
 # vi: encoding=utf-8
