@@ -29,9 +29,10 @@ Requires:	ImageMagick-coder-png
 Requires:	Xwnc = %{version}-%{release}
 Requires:	nucleo >= 0.6
 Requires:	vfmg >= 0.9.95
+Conflicts:	filesystem < 3.0-20
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_wmpropsdir	/usr/share/wm-properties
+%define		_wmpropsdir	/usr/share/gnome/wm-properties
 
 %description
 Metisse is an experimental X desktop with some OpenGL capacity. It
